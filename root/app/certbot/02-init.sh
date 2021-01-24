@@ -23,6 +23,18 @@ then
 # --manual-auth-hook /app/duckdns/authenticator.sh \
 # --manual-cleanup-hook /app/duckdns/cleanup.sh
 
+certbot certonly \
+--no-eff-email \
+--manual \
+--text \
+--agree-tos \
+--manual-public-ip-logging-ok \
+--email $(var CERT_EMAIL) \
+-d $(var CERT_DOMAIN).duckdns.org \
+--preferred-challenges=dns \
+--manual-auth-hook /app/duckdns/authenticator.sh \
+--manual-cleanup-hook /app/duckdns/cleanup.sh
+
     if [ $? -eq 1 ]
     then   
         log -e "Certificate request failed."
